@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SEO Feedback Tool
 
-## Getting Started
+A standalone web application that provides comprehensive SEO analysis and feedback for websites. Built with Next.js and Material-UI.
 
-First, run the development server:
+## Features
 
+- **Website Analysis**: Submit any website URL for SEO analysis
+- **Email Reports**: Receive detailed PDF reports via email
+- **Real-time Status**: Track analysis progress with status dialogs
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Modern UI**: Clean, professional interface with dark theme
+
+## Tech Stack
+
+- **Framework**: Next.js 16
+- **UI Library**: Material-UI (MUI)
+- **Styling**: Emotion (CSS-in-JS)
+- **Icons**: Material-UI Icons
+- **Fonts**: Inter & Outfit (Google Fonts)
+
+## Prerequisites
+
+- Node.js >= 20.9.0
+- npm >= 9.0.0
+
+## Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd Excollo-Website-Next.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. **Enter Website URL**: Input the URL of the website you want to analyze
+2. **Provide Email**: Enter your email address to receive the report
+3. **Submit**: Click "Send me the report" button
+4. **Wait**: The analysis runs in the background (approximately 10 minutes)
+5. **Receive Report**: Check your email for the PDF report with SEO insights
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend Integration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This tool connects to an n8n webhook endpoint that:
+- Analyzes the submitted website
+- Generates a comprehensive SEO report
+- Sends the report as a PDF to the provided email address
 
-## Deploy on Vercel
+**Webhook URL**: `https://n8n-excollo.azurewebsites.net/webhook/528aa770-e351-4ae0-9626-38b398e40487`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+├── app/
+│   ├── layout.jsx              # Root layout with fonts and providers
+│   ├── page.jsx                # Homepage (redirects to SEO tool)
+│   ├── globals.css             # Global styles
+│   └── sampletools/
+│       └── seofeedback/
+│           └── page.jsx        # SEO Feedback tool component
+├── components/
+│   ├── SimpleHeader.jsx        # Header component
+│   ├── SimpleFooter.jsx        # Footer component
+│   └── ClientProviders.jsx     # Client-side providers
+├── public/                     # Static assets
+└── package.json               # Dependencies and scripts
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+
+## Deployment
+
+This project can be easily deployed to:
+- **Vercel** (recommended for Next.js)
+- **Netlify**
+- **AWS Amplify**
+- Any Node.js hosting platform
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import the project in Vercel
+3. Deploy with default settings
+
+## Environment Variables
+
+No environment variables are required for basic functionality. The webhook URL is hardcoded in the component.
+
+If you want to make it configurable:
+
+```env
+NEXT_PUBLIC_SEO_FEEDBACK_WEBHOOK_URL=your-webhook-url
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+This project is private and proprietary.
+
+## Support
+
+For issues or questions, please contact the development team.

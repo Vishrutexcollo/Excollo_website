@@ -1,19 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, Container, Typography, TextField, Button, Fade, Dialog, DialogContent, IconButton } from "@mui/material";
+import { Box, Container, Typography, TextField, Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { IoLogoWhatsapp } from "react-icons/io5";
-import NavBar from "@/components/NavBar/NavBar";
-import Footer from "@/components/Footer/Footer";
-import Excollo3DCaseStudy from "@/components/AboutUs/Excollo3DCaseStudy";
+import SimpleHeader from "@/components/SimpleHeader";
+import SimpleFooter from "@/components/SimpleFooter";
 
-const resolveWebhookEndpoint = () => {
-  // Use proxy in development, direct URL in production
-  return process.env.NODE_ENV === 'development'
-    ? '/api/seo-feedback'
-    : 'https://n8n-excollo.azurewebsites.net/webhook/528aa770-e351-4ae0-9626-38b398e40487';
-};
+const webhookEndpoint = 'https://n8n-excollo.azurewebsites.net/webhook/528aa770-e351-4ae0-9626-38b398e40487';
 
 export default function SEOFeedback() {
   const [url, setUrl] = useState("");
@@ -22,10 +15,7 @@ export default function SEOFeedback() {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [submittedDetails, setSubmittedDetails] = useState(null);
-  const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const [showStatusDialog, setShowStatusDialog] = useState(false);
-
-  const webhookEndpoint = resolveWebhookEndpoint();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,14 +61,6 @@ export default function SEOFeedback() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowWhatsAppButton(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Auto-close dialog after 15 seconds
   useEffect(() => {
     if (showStatusDialog) {
@@ -89,14 +71,6 @@ export default function SEOFeedback() {
       return () => clearTimeout(timer);
     }
   }, [showStatusDialog]);
-
-  const handleWhatsapp = () => {
-    window.open(
-      "https://wa.me/918890204938?text=Hey%2C%20I%20need%20help%20with%20a%20tech%20solution.%20Let's%20talk%21",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
 
   const isSubmitDisabled = loading || !url.trim() || !email.trim();
 
@@ -116,7 +90,7 @@ export default function SEOFeedback() {
       />
 
       <Box sx={{ position: "relative", zIndex: 3 }}>
-        <NavBar />
+        <SimpleHeader />
       </Box>
 
       <Container
@@ -258,49 +232,7 @@ export default function SEOFeedback() {
 
       </Container>
 
-      <Container
-        maxWidth="xl"
-        sx={{
-          px: { xs: 1, sm: 2, md: 3 },
-          mt: { xs: 2, sm: 3, md: 4 },
-        }}
-      >
-        <Box
-          sx={{
-            mt: { xs: 1, md: 2 },
-            mb: { xs: 0, md: 0 },
-            position: "relative",
-            zIndex: 1,
-            background: "#000",
-          }}
-        >
-          <Excollo3DCaseStudy disableScroll />
-        </Box>
-      </Container>
-
-      <Footer />
-
-      <Fade in={showWhatsAppButton}>
-        <Button
-          onClick={handleWhatsapp}
-          variant="contained"
-          color="primary"
-          sx={{
-            position: "fixed",
-            height: 60,
-            bottom: { xs: 200, md: 100 },
-            right: { xs: 24, md: 24 },
-            zIndex: 1000,
-            borderRadius: "50%",
-            background: "rgba(255, 255, 255, 0.1)",
-            "&:hover": {
-              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-            },
-          }}
-        >
-          <IoLogoWhatsapp size={30} />
-        </Button>
-      </Fade>
+      <SimpleFooter />
 
       {/* Status Dialog Popup */}
       <Dialog

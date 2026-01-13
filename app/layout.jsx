@@ -18,8 +18,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Excollo",
-  description: "Outcome driven innovation",
+  title: "SEO Feedback Tool",
+  description: "Get comprehensive SEO analysis and feedback for your website",
 };
 
 export default function RootLayout({ children }) {

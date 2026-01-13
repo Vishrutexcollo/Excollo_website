@@ -1,6 +1,7 @@
 {
-  "name": "next-website",
-  "version": "0.1.0",
+  "name": "seo-feedback-tool",
+  "version": "1.0.0",
+  "description": "SEO analysis and feedback tool with email reports",
   "private": true,
   "scripts": {
     "dev": "next dev",
